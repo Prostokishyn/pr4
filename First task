@@ -1,0 +1,85 @@
+var studentsInfo = [
+  {
+    Прізвище: "Простокішин",
+    Рік_народження: 2004,
+    Дисципліни: {
+      Хмарні_технології: 5,
+      ІЗВП: 4,
+      КРПП: 5,
+    },
+  },
+
+  {
+    Прізвище: "Лук'янчук",
+    Рік_народження: 2005,
+    Дисципліни: {
+      Хмарні_технології: 4,
+      ІЗВП: 4,
+      КРПП: 5,
+    },
+  },
+
+  {
+    Прізвище: "Шепель",
+    Рік_народження: 2005,
+    Дисципліни: {
+      Хмарні_технології: 5,
+      ІЗВП: 5,
+      КРПП: 5,
+    },
+  },
+];
+
+function displayStudentsInfo() {
+  for (var i=0; i<studentsInfo.length; i++) {
+    var student = studentsInfo[i];
+    var totalScore = 0;
+    var subjectCount = 0;
+
+    for (var subject in student.Дисципліни) {
+      totalScore+=student.Дисципліни[subject];
+      subjectCount++;
+    }
+
+    var averageScore=totalScore/subjectCount;
+
+    Logger.log("Прізвище: " +student.Прізвище);
+    Logger.log("Рік народження: " +student.Рік_народження);
+    Logger.log("Середній бал: " +averageScore);
+  }
+}
+
+function displayStudentsBySubject(subjectName) {
+  studentsInfo.sort(function(a, b) {
+    return b.Дисципліни[subjectName] - a.Дисципліни[subjectName];
+  });
+
+  for (var i=0; i<studentsInfo.length; i++) {
+    var student = studentsInfo[i];
+    Logger.log("Прівзище: " + student.Прізвище);
+    Logger.log("Оцінка за  " +subjectName+ ": " + student.Дисципліни[subjectName]);
+  }
+}
+
+function displayStudentsWithMinimumAverageGrade(minGrade) {
+  for (var i=0; i<studentsInfo.length; i++) {
+    var student = studentsInfo[i];
+    var totalScore=0;
+    var subjectCount=0;
+
+    for (var subject in student.Дисципліни) {
+      totalScore+=student.Дисципліни[subject];
+      subjectCount++;
+    }
+
+    var averageScore=totalScore/subjectCount;
+
+    if (averageScore >= minGrade) {
+      Logger.log("Прізвище: " +student.Прізвище);
+      Logger.log("Середній бал: " + averageScore);
+    }
+  }
+}
+displayStudentsInfo();
+displayStudentsBySubject("Хмарні_технології");
+displayStudentsWithMinimumAverageGrade(5);
