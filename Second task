@@ -1,0 +1,13 @@
+function sendEmail() {
+  var recipient = "m.v.boiko@rcit.ukr.education";
+  var subject = "Практична №4";
+  var body = "Доброго дня";
+  MailApp.sendEmail(recipient, subject, body);
+  Logger.log("Тема: " +subject);
+  Logger.log("Одержувач: " +recipient);
+}
+
+ScriptApp.newTrigger("senEmail")
+.timeBased()
+.after(2*60*1000)
+.create();
